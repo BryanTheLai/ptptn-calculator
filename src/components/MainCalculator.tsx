@@ -9,22 +9,16 @@ function MainCalculator() {
   const [monthlyPayAmount, setMonthlyPayAmount] = useState(0);
 
   useEffect(() => {
+    console.log("<- Use Effect ->");
     console.log("Lend Amount:", lendAmount);
     console.log("Lend Interest:", lendInterest);
     console.log("Months:", months);
-    const totalInterest =
-      Math.round(
-        ((lendAmount * (1 + lendInterest / 100) ** (months / 12)) /
-          lendAmount) *
-          100
-      ) / 100;
-    console.log("Interest:", totalInterest);
-    console.log("Interest:", Math.round(totalInterest * 100) / 100);
-    console.log("Interest:", totalInterest.toFixed(2));
+    // Monthly Payment Formula Cross Referenced with : https://www.ptptn.gov.my/loancalc/loancalc-ujrah/#!
+    const ptptn = Math.round((lendAmount + (lendAmount * lendInterest/100 * (months / 12))) / (months/12*12)*100)/100;
+    console.log("PTPTN",ptptn);
 
-    const finalMonthlyPayment = (lendAmount / months) * totalInterest;
-    const finalTotalPayment = lendAmount * totalInterest;
-    setMonthlyPayAmount(finalMonthlyPayment); // Monthly Amount to Pay
+    const finalTotalPayment = Math.round(ptptn*months*100)/100;
+    setMonthlyPayAmount(ptptn); // Monthly Amount to Pay
     setTotalAmount(finalTotalPayment); //Total Loan Amount to Pay
   }, [lendAmount, lendInterest, months]);
 
@@ -45,7 +39,7 @@ function MainCalculator() {
     <>
       <div className="p-8">
         <h1 className="text-4xl font-bold mb-4">Education Loan Calculator</h1>
-        <h2 className="text-2xl mb-4">PTPTN Compounded Interest</h2>
+        <h2 className="text-2xl mb-4">PTPTN Compounded Interest (https://www.ptptn.gov.my/loancalc/loancalc-ujrah/#!)</h2>
 
         <form className="mb-8">
           {/* Lend Amount */}
@@ -99,23 +93,27 @@ function MainCalculator() {
         </form>
 
         <h2 className="text-left text-lg font-bold">
-        RM {(lendAmount / months).toFixed(2)} - Monthly Principal Payment
+        RM {(Math.round(lendAmount / months *100)/100).toLocaleString()} - Monthly Principal Payment
         </h2>
         <h2 className="text-left text-lg font-bold border-b">
-        RM {(monthlyPayAmount - lendAmount / months).toFixed(2)} - Monthly
+        RM {(monthlyPayAmount - lendAmount / months).toFixed(2).toLocaleString()} - Monthly
           Interest Payment
         </h2>
         <h2 className="text-left text-lg font-bold">
-          RM {monthlyPayAmount.toFixed(2)} - Total Monthly Repayment Payment
+          RM {monthlyPayAmount.toFixed(2).toLocaleString()} - Total Monthly Repayment Payment
           Amount
         </h2>
         <h2 className="text-left text-lg font-bold">
-          RM {totalAmount.toFixed(2)} - Total Payment Amount
+          RM {(totalAmount-lendAmount).toFixed(2).toLocaleString()} - Payment Amount without Interest
+        </h2>
+        <h2 className="text-left text-lg font-bold">
+          RM {totalAmount.toFixed(2).toLocaleString()} - Total Payment Amount with Interest
         </h2>
       </div>
     </>
   );
 }
+
 
 export default MainCalculator;
 
