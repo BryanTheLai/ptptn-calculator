@@ -14,7 +14,7 @@ const listDetails = (
   let result = [];
   let cumulativeMonthlyPayment = 0;
   let remainingAmount = totalAmount;
-  let monthlyPayAmount = Math.floor(initialMonthlyPayAmount * 100) / 100;
+  let monthlyPayAmount = Math.round(initialMonthlyPayAmount * 100) / 100;
 
   for (let i = 1; i <= months; i++) {
     cumulativeMonthlyPayment += monthlyPayAmount;
