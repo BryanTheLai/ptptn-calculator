@@ -52,6 +52,7 @@ function MainCalculator() {
               value={lendAmount}
               onChange={handleTotalAmountChange}
               className="w-full p-2 border border-gray-300 rounded"
+              aria-label="Amount to Lend"
             />
           </div>
 
@@ -69,6 +70,7 @@ function MainCalculator() {
                 min={0}
                 max={100}
                 defaultValue={1}
+                aria-label="Interest Compounded Annually"
                 className="w-full p-2 border border-gray-300 rounded rounded-r-none"
               />
               <span className="p-2 bg-gray-700 border border-l-0 border-gray-300 rounded rounded-l-none">
@@ -88,6 +90,7 @@ function MainCalculator() {
               type="number"
               value={months}
               onChange={handleTotalAmountChange}
+              aria-label="Months to Payback Loan"
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
