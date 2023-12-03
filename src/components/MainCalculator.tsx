@@ -39,7 +39,7 @@ function MainCalculator() {
   return (
     <>
       <div className="p-8">
-        <h1 className="text-4xl font-bold mb-4">Education Loan Calculator</h1>
+        <h1 className="text-4xl font-bold mb-4">ABCD Loan Calculator</h1>
         <h2 className="text-2xl mb-4">PTPTN Calculator (https://www.ptptn.gov.my/loancalc/loancalc-ujrah/#!)</h2>
 
         <form className="mb-8">
