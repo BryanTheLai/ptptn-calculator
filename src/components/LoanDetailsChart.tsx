@@ -9,16 +9,16 @@ interface LoanDetailsChart {
 
 const LoanDetailsChart: React.FC<LoanDetailsChart> = ({ months, totalAmount, monthlyPayAmount }) => {
     const data = [];
+    let remainingAmount = totalAmount;
     let cumulativeMonthlyPayment = 0;
-    let leftToPay = totalAmount;
+    const monthlyPayment = Math.round(monthlyPayAmount * 100) / 100;
 
     for (let i = 1; i <= months; i++) {
-        monthlyPayAmount = Math.round(monthlyPayAmount*100)/100;
-        cumulativeMonthlyPayment += monthlyPayAmount;
-        leftToPay -= monthlyPayAmount;
-        cumulativeMonthlyPayment = Math.round(cumulativeMonthlyPayment*100)/100;
-        leftToPay = Math.round(leftToPay*100)/100;
-        data.push({ month: i, monthlyPayAmount, cumulativeMonthlyPayment, leftToPay });
+        cumulativeMonthlyPayment += monthlyPayment;
+        remainingAmount -= monthlyPayment;
+        cumulativeMonthlyPayment = Math.round(cumulativeMonthlyPayment * 100) / 100;
+        remainingAmount = Math.round(remainingAmount * 100) / 100;
+        data.push({ month: i, monthlyPayAmount: monthlyPayment, cumulativeMonthlyPayment, leftToPay: remainingAmount });
     }
 
     return (

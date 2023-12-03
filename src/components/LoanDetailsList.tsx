@@ -7,28 +7,31 @@ interface LoanDetailsList {
 }
 
 const listDetails = (
-  monthlyPayAmount: number,
+  initialMonthlyPayAmount: number,
   totalAmount: number,
   months: number
 ): JSX.Element[] => {
   let result = [];
   let cumulativeMonthlyPayment = 0;
-  let leftToPay = totalAmount;
-  for (let i = 1; i < months + 1; i++) {
-    monthlyPayAmount = Math.floor(monthlyPayAmount*100)/100;
+  let remainingAmount = totalAmount;
+  let monthlyPayAmount = Math.floor(initialMonthlyPayAmount * 100) / 100;
+
+  for (let i = 1; i <= months; i++) {
     cumulativeMonthlyPayment += monthlyPayAmount;
-    leftToPay -= monthlyPayAmount;
+    remainingAmount -= monthlyPayAmount;
+
     result.push(
       <tr key={i} className="border">
         <td className="border p-1">{i}</td>
-        <td className="border p-1">{(Math.round(monthlyPayAmount*100)/100).toFixed(2)}</td>
-        <td className="border p-1">{(Math.round(cumulativeMonthlyPayment*100)/100).toFixed(2)}</td>
-        <td className="border p-1">{(Math.round(leftToPay*100)/100).toFixed(2)}</td>
+        <td className="border p-1">{monthlyPayAmount.toFixed(2)}</td>
+        <td className="border p-1">{cumulativeMonthlyPayment.toFixed(2)}</td>
+        <td className="border p-1">{remainingAmount.toFixed(2)}</td>
       </tr>
     );
   }
   return result;
 };
+
 
 const LoanDetailsList: React.FC<LoanDetailsList> = ({
   totalAmount,
