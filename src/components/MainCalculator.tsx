@@ -39,9 +39,11 @@ function MainCalculator() {
   return (
     <>
       <div className="p-8">
-        <h1 className="text-4xl font-bold mb-4">ABCD Loan Calculator</h1>
-        <h2 className="text-2xl mb-4">PTPTN Calculator (https://www.ptptn.gov.my/loancalc/loancalc-ujrah/#!)</h2>
-
+        <h1 className="text-4xl font-bold mb-4">PTPTN Loan Calculator</h1>
+        <h2 className="text-2xl mb-4"><a id="ownerP" href="https://github.com/BryanTheLai" data-value="GITHUB">GitHub</a></h2>
+        <h2 className="text-2xl mb-1">Based on</h2>
+        <h2 className="text-2xl mb-4">https://www.ptptn.gov.my/loancalc/loancalc-ujrah/#!</h2>
+        
         <form className="mb-8">
           {/* Lend Amount */}
           <div className="mb-4">
